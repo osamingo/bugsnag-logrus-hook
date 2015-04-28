@@ -11,8 +11,8 @@ func TestNewBugsnagHook(t *testing.T) {
 
 	Convey("Given empty args", t, func() {
 
-		args := func() (string, string, []logrus.Level, int) {
-			return "", "", []logrus.Level{}, -1
+		args := func() (string, string, []logrus.Level, uint) {
+			return "", "", []logrus.Level{}, 0
 		}
 
 		Convey("When NewBugsnagHook", func() {
@@ -29,8 +29,8 @@ func TestNewBugsnagHook(t *testing.T) {
 
 		Convey("Given APIKey", func() {
 
-			args = func() (string, string, []logrus.Level, int) {
-				return "apiKey", "", []logrus.Level{}, -1
+			args = func() (string, string, []logrus.Level, uint) {
+				return "apiKey", "", []logrus.Level{}, 0
 			}
 
 			Convey("When NewBugsnagHook", func() {
@@ -49,8 +49,8 @@ func TestNewBugsnagHook(t *testing.T) {
 
 		Convey("Given APIKey, releaseStage", func() {
 
-			args = func() (string, string, []logrus.Level, int) {
-				return "apiKey", "test", []logrus.Level{}, -1
+			args = func() (string, string, []logrus.Level, uint) {
+				return "apiKey", "test", []logrus.Level{}, 0
 			}
 
 			Convey("When NewBugsnagHook", func() {
@@ -69,27 +69,7 @@ func TestNewBugsnagHook(t *testing.T) {
 
 		Convey("Given APIKey, releaseStage, levels", func() {
 
-			args = func() (string, string, []logrus.Level, int) {
-				return "apiKey", "test", []logrus.Level{logrus.ErrorLevel}, -1
-			}
-
-			Convey("When NewBugsnagHook", func() {
-
-				_, err := NewBugsnagHook(args())
-
-				Convey("Then error is occured", func() {
-
-					So(err, ShouldNotBeNil)
-
-				})
-
-			})
-
-		})
-
-		Convey("Given APIKey, releaseStage, levels, skip", func() {
-
-			args = func() (string, string, []logrus.Level, int) {
+			args = func() (string, string, []logrus.Level, uint) {
 				return "apiKey", "test", []logrus.Level{logrus.ErrorLevel}, 0
 			}
 

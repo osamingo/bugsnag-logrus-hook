@@ -15,7 +15,7 @@ type BugsnagHook struct {
 }
 
 // NewBugsnagHook setups Bugsnag configuration and BugsnagHook.
-func NewBugsnagHook(apiKey, releaseStage string, lvs []logrus.Level, skip int) (h *BugsnagHook, err error) {
+func NewBugsnagHook(apiKey, releaseStage string, lvs []logrus.Level, skip uint) (h *BugsnagHook, err error) {
 
 	if apiKey == "" {
 		err = fmt.Errorf("apiKey should not be empty")
@@ -32,17 +32,12 @@ func NewBugsnagHook(apiKey, releaseStage string, lvs []logrus.Level, skip int) (
 		return
 	}
 
-	if skip < 0 {
-		err = fmt.Errorf("skip should be positive number or zero")
-		return
-	}
-
 	bugsnag.Configure(bugsnag.Configuration{
 		APIKey:       apiKey,
 		ReleaseStage: releaseStage,
 	})
 
-	h = &BugsnagHook{Lvs: lvs, Skip: skip}
+	h = &BugsnagHook{Lvs: lvs, Skip: int(skip)}
 
 	return
 }
