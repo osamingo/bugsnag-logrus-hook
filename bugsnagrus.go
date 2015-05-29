@@ -43,7 +43,7 @@ func NewBugsnagHook(apiKey, releaseStage string, lvs []logrus.Level, skip uint) 
 }
 
 // Fire forwards an error to Bugsnag.
-func (h *BugsnagHook) Fire(entry *logrus.Entry) (err error) {
+func (h *BugsnagHook) Fire(entry *logrus.Entry) error {
 
 	s := []interface{}{}
 
